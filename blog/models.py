@@ -2,7 +2,11 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.forms import Media
 from django.utils import timezone
+from imagekit.models import ProcessedImageField
+from imagekit.processors import Thumbnail
+from blog.fields import ThumbnailImageField
 
 
 class Post(models.Model):
@@ -13,6 +17,13 @@ class Post(models.Model):
             default=timezone.now)
     published_date = models.DateTimeField(
             blank=True, null=True)
+
+    # photo_thumbnail = ThumbnailImageField(upload_to='blog/%Y/%m')
+    photo_thumbnail = ProcessedImageField(
+        upload_to='static/blog/post',
+        processors=[Thumbnail(652, 400)],  # 처리할 작업 목룍
+        format='JPEG',  # 최종 저장 포맷
+        options={'quality': 60})  # 저장 옵션
 
     def publish(self):
         self.published_date = timezone.now()

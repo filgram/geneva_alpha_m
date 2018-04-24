@@ -18,7 +18,7 @@ def main(request):
     #         create_user_form.save()
     # else:
     #     create_user_form = UserCreationForm()
-    posts = Post.objects.filter(created_date__lte=timezone.now()).order_by('-created_date')[:6]
+    posts = Post.objects.filter(created_date__lte=timezone.now()).order_by('-created_date')[:5]
     return render(request, 'main/main.html', {'posts': posts})
 
 
