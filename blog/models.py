@@ -18,7 +18,7 @@ class Post(models.Model):
     published_date = models.DateTimeField(
             blank=True, null=True)
 
-    photo_thumbnail = ThumbnailImageField(upload_to='static/blog/post')
+    photo_thumbnail = ThumbnailImageField(upload_to='static/blog/post/%Y/%m')
     # photo_thumbnail = ProcessedImageField(
     #     upload_to='static/blog/post',
     #     processors=[Thumbnail(652, 400)],  # 처리할 작업 목룍
