@@ -1,29 +1,101 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-sm-12">
-                <h3>광고컨테이너 상세</h3>
-                <hr>
-            </div>
-        </div>
-        <div class="row">
-            <div class="post">
-                {% if post.published_date %}
-                    <div class="date">
-                        {{ post.published_date }}
+    <div class="container">
+
+        <div class="row row-offcanvas row-offcanvas-right">
+
+            <div class="col-12 col-md-9">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <ul class="media-list main-list">
+                            <li class="media">
+                                <img class="pull-left media-object" src="/{{ post.photo_thumbnail }}" width="250" height="150">
+                                {% if post.published_date %}
+                                    <div class="date">
+                                        {{ post.published_date }}
+                                    </div>
+                                {% endif %}
+                                <div class="media-body">
+                                    <h1 class="media-heading">{{ post.title }}</h1>
+                                    <p>{{ post.text|linebreaksbr }}</p>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                {% endif %}
+                </div>
+                <div class="jumbotron">
+                    <h1>Hello, world!</h1>
+                    <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some
+                        responsive-range viewport sizes to see it in action.</p>
+                </div>
+                <div class="row">
+                    <div class="col-6 col-lg-4">
+                        <h2>Heading</h2>
+                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                            tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
+                            malesuada magna mollis euismod. Donec sed odio dui. </p>
+                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                    </div><!--/span-->
+                    <div class="col-6 col-lg-4">
+                        <h2>Heading</h2>
+                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                            tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
+                            malesuada magna mollis euismod. Donec sed odio dui. </p>
+                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                    </div><!--/span-->
+                    <div class="col-6 col-lg-4">
+                        <h2>Heading</h2>
+                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                            tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
+                            malesuada magna mollis euismod. Donec sed odio dui. </p>
+                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                    </div><!--/span-->
+                    <div class="col-6 col-lg-4">
+                        <h2>Heading</h2>
+                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                            tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
+                            malesuada magna mollis euismod. Donec sed odio dui. </p>
+                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                    </div><!--/span-->
+                    <div class="col-6 col-lg-4">
+                        <h2>Heading</h2>
+                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                            tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
+                            malesuada magna mollis euismod. Donec sed odio dui. </p>
+                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                    </div><!--/span-->
+                    <div class="col-6 col-lg-4">
+                        <h2>Heading</h2>
+                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                            tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem
+                            malesuada magna mollis euismod. Donec sed odio dui. </p>
+                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                    </div><!--/span-->
+                </div><!--/row-->
+            </div><!--/span-->
 
-                <h1>{{ post.title }}</h1>
-                <p>{{ post.text|linebreaksbr }}</p>
-                <a class="save btn btn-default" href="{% url 'post_list' %}"><span class="glyphicon glyphicon-share-alt"></span>List</a>
-                {% if user.id == post.author.id %}
-                    <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-                {% endif %}
-            </div>
-        </div>
+            <div class="col-6 col-md-3 sidebar-offcanvas" id="sidebar">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">광고링크 목록</a>
+                    <a href="{% url 'post_list' %}" class="list-group-item">광고컨테이너 목록으로</a>
+                    <a href="#" class="list-group-item">Link</a>
+                    <a href="#" class="list-group-item">Link</a>
+                    <a href="#" class="list-group-item">Link</a>
+                    <a href="#" class="list-group-item">Link</a>
+                    <a href="#" class="list-group-item">Link</a>
+                    <a href="#" class="list-group-item">Link</a>
+                    <a href="#" class="list-group-item">Link</a>
+                    <a href="#" class="list-group-item">Link</a>
+                </div>
+            </div><!--/span-->
+        </div><!--/row-->
+
+
+    <a class="save btn btn-default" href="{% url 'post_list' %}"><span class="glyphicon glyphicon-share-alt"></span>List</a>
+    {% if user.id == post.author.id %}
+        <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    {% endif %}
+    <hr>
     </div>
-
 {% endblock %}
