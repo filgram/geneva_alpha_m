@@ -19,6 +19,9 @@ class Post(models.Model):
             blank=True, null=True)
 
     photo_thumbnail = ThumbnailImageField(upload_to='static/blog/post/%Y/%m')
+    active = models.BooleanField(
+            null=False, default=True
+    )
     # photo_thumbnail = ProcessedImageField(
     #     upload_to='static/blog/post',
     #     processors=[Thumbnail(652, 400)],  # 처리할 작업 목룍

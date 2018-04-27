@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/$', blog_view.post_detail, name='post_detail'),
     url(r'^post/new/$', blog_view.post_new, name='post_new'),
     url(r'^post/(?P<pk>\d+)/edit/$', blog_view.post_edit, name='post_edit'),
+    url(r'^post/(?P<pk>\d+)/delete/$', blog_view.post_delete, name='post_delete'),
+    url(r'^my_info/$', views.my_info, name='my_info'),
 ]

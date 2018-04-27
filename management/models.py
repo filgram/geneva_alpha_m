@@ -5,6 +5,7 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
 from django.db import models
+from blog.fields import ThumbnailImageField
 
 
 class UserManager(BaseUserManager):
@@ -85,3 +86,22 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+
+class MainTimeBoard(models.Model):
+    title = models.CharField(max_length=200)
+    photo_thumbnail = ThumbnailImageField(upload_to='static/blog/post/%Y/%m')
+    active = models.BooleanField(
+            null=False, default=True
+    )
+    # photo_thumbnail = ProcessedImageField(
+    #     upload_to='static/blog/post',
+    #     processors=[Thumbnail(652, 400)],  # 처리할 작업 목룍
+    #     format='JPEG',  # 최종 저장 포맷
+    #     options={'quality': 60})  # 저장 옵션
+
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.title

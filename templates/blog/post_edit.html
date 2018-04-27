@@ -12,11 +12,36 @@
                     </div>
                 </div>
             </div>
+            <script>
+                $(document).ready(function(){
+                    var editor_object = [];
+                    nhn.husky.EZCreator.createInIFrame({
+                        oAppRef: editor_object,
+                        elPlaceHolder: "text",
+                        sSkinURI: "/static/smartedit/SmartEditor2Skin.html",
+                        fCreator: "createSEditor2",
+                        htParams:{
+                            buseToolbar : true,
+                            buseVerticalResizer: true,
+                            buseModeChanger: true,
+                        }
+                    });
+                    $("#savebutton").click(function(){
+                        //id가 smarteditor인 textarea에 에디터에서 대입
+                        editor_object.getById["text"].exec("UPDATE_CONTENTS_FIELD", []);
+                        // 이부분에 에디터 validation 검증
+
+                        //폼 submit
+                        $("#frm").submit();
+                    })
+                })
+
+            </script>
             <div class="col-sm-9 text-left">
                 {% comment %}
                     파일 업로드를 위해서 form 옵션에 enctype="multipart/form-data" 추가해야한다.
                 {% endcomment %}
-                <form method="POST" class="post-form" enctype="multipart/form-data">
+                <form method="POST" class="post-form" enctype="multipart/form-data" id="frm">
                     {% csrf_token %}
 {#                    {{ form.as_p }}#}
                     <div class="form-group">
@@ -25,8 +50,8 @@
                                 {% if form.initial.title %} value="{{ form.initial.title }}" {% endif %}>
                     </div>
                     <div class="form-group">
-                        <label for="id_text">내용:</label>
-                        <textarea class="form-control" name="text" id="id_text" rows="10" cols="40" required="" placeholder="내용을 입력하세요">{% if form.initial.text %}{{ form.initial.text }}{% endif %}</textarea>
+                        <label for="text">내용:</label>
+                        <textarea class="form-control" name="text" id="text" rows="10" cols="40" required="" placeholder="내용을 입력하세요">{% if form.initial.text %}{{ form.initial.text }}{% endif %}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="id_photo_thumbnail">썸네일 이미지 파일:</label>
@@ -41,7 +66,7 @@
 
 
                     <a class="save btn btn-default" href="{% url 'post_list' %}"><span class="glyphicon glyphicon-share-alt"></span>List</a>
-                    <button type="submit" class="save btn btn-default">Save</button>
+                    <button type="button" class="save btn btn-default" id="savebutton">Save</button>
                 </form>
             </div>
 

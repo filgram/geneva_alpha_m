@@ -8,6 +8,7 @@ from django.utils import timezone
 from main.forms import LoginForm
 from management.admin import UserCreationForm
 from blog.models import Post
+from management.models import MainTimeBoard
 # from management.forms import UserCreationForm
 
 
@@ -19,7 +20,8 @@ def main(request):
     # else:
     #     create_user_form = UserCreationForm()
     posts = Post.objects.filter(created_date__lte=timezone.now()).order_by('-created_date')[:5]
-    return render(request, 'main/main.html', {'posts': posts})
+    timeboards = MainTimeBoard.objects.all()
+    return render(request, 'main/main.html', {'posts': posts, 'timeboards': timeboards})
 
 
 def login(request):
@@ -71,3 +73,14 @@ def signup(request):
     }
 
     return render(request, 'main/sigup.html', context)
+
+
+def my_info(request):
+    if request.user.is_active:
+        posts = Post.objects.filter(author_id=request.user.id).order_by('-created_date')
+        posts_count = Post.objects.filter(author_id=request.user.id).count()
+        return render(request, 'main/user/my_info.html', {'posts': posts, 'posts_count': posts_count})
+
+    login_form = LoginForm()
+    context = {'login_form': login_form, }
+    return redirect('/login', context)
